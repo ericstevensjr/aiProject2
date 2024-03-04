@@ -5,6 +5,7 @@ import matplotlib.animation as animation
 
 from utils import *
 from grid import *
+from breadthFirstSearch import *
 
 def gen_polygons(worldfilepath):
     polygons = []
@@ -24,8 +25,8 @@ if __name__ == "__main__":
     epolygons = gen_polygons('TestingGrid/world1_enclosures.txt')
     tpolygons = gen_polygons('TestingGrid/world1_turfs.txt')
 
-    source = Point(24,17)
-    dest = Point(28,20)
+    source = Point(8,10)
+    dest = Point(43,40)
 
     fig, ax = draw_board()
     draw_grids(ax)
@@ -49,10 +50,15 @@ if __name__ == "__main__":
             draw_green_line(ax, [polygon[i].x, polygon[(i+1)%len(polygon)].x], [polygon[i].y, polygon[(i+1)%len(polygon)].y])
 
     #### Here call your search to compute and collect res_path
+    res_path, totalCost, nodesExpanded = breadthFirstSearch(source, dest, epolygons, tpolygons, MAX)
 
-    res_path = [Point(24,17), Point(25,17), Point(26,17), Point(27,17),  
-                Point(28,17), Point(28,18), Point(28,19), Point(28,20)]
+    # res_path = [Point(24,17), Point(25,17), Point(26,17), Point(27,17),  
+    #            Point(28,17), Point(28,18), Point(28,19), Point(28,20)]
     
+    # if res_path:
+    #    for i in range(len(res_path) - 1):
+    #        draw_result_line()
+
     for i in range(len(res_path)-1):
         draw_result_line(ax, [res_path[i].x, res_path[i+1].x], [res_path[i].y, res_path[i+1].y])
         plt.pause(0.1)

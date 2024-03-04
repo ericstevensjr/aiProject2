@@ -1,4 +1,5 @@
 import heapq
+from grid import Point
 
 class Stack:
     "A container with a last-in-first-out (LIFO) policy"
@@ -7,7 +8,7 @@ class Stack:
 
     def push(self,item):
         "Push 'item' onto the stack"
-        self.list.append(item)
+        self.list.insert(0, item)
 
     def pop(self):
         "Pop the most recently pushed item from the stack"
@@ -76,3 +77,70 @@ class PriorityQueue:
                 break
         if flag == False:
             self.push(item, priority)
+
+def isPointInsidePolygon(point, polygon):
+    x, y = point.x, point.y
+    inside = False
+
+    # Check if point is on any of the edges
+    for i in range(len(polygon)):
+        p1 = polygon[i]
+        p2 = polygon[(i + 1) % len(polygon)]
+        if (p1.y == y and p2.y == y) and (min(p1.x, p2.x) <= x <= max(p1.x, p2.x)):
+            # Point is on a horizontal edge
+            return True
+        if (p1.x == x and p2.x == x) and (min(p1.y, p2.y) <= y <= max(p1.y, p2.y)):
+            # Point is on a vertical edge
+            return True
+        
+    # Ray casting algorithm to check if point is inside the polgyon
+    n = len(polygon)
+    for i in range(n):
+        j = (i + 1) % n
+        if ((polygon[i].y > y) != (polygon[j].y > y)) and \
+            (x < (polygon[j].x - polygon[i].x) * (y - polygon[i].y) / (polygon[j].y - polygon[i].y) + polygon[i].x):
+            inside = not inside
+
+    return inside
+
+def isPointInEnclosure(point, enclosures):  
+    for enclosure in enclosures:
+        if isPointInsidePolygon(point, enclosure):
+            return True
+    return False
+
+def isPointInTurf(point, turfs):
+    for turf in turfs:
+        if isPointInsidePolygon(point, turf):
+            return True
+    return False
+
+def getNeighbors(point, enclosures, MAX):
+    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    neighbors = []
+
+    for dx, dy in directions:
+        nx, ny = point.x + dx, point.y + dy
+
+        # Create neighbor point
+        neighbor = Point(nx, ny)
+
+        # Check if the neighbor is within the grid bounds
+        if 0 <= nx < MAX and 0 <= ny < MAX:
+            # Make sure neighbor isn't in enclosure
+            if not isPointInEnclosure(point, enclosures):
+                neighbors.append(neighbor)
+
+    return neighbors
+
+
+def reconstructPath(parentNodes, source, destination):
+    path = []
+    currentPoint = destination
+    while currentPoint != source:
+        path.append(currentPoint)
+        currentPoint = parentNodes[currentPoint]
+    path.append(source)
+    path.reverse()
+
+    return path
