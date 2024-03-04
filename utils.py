@@ -121,12 +121,14 @@ def getNeighbors(point, enclosures, MAX):
 
     for dx, dy in directions:
         nx, ny = point.x + dx, point.y + dy
-
         # Create neighbor point
         neighbor = Point(nx, ny)
 
         # Check if the neighbor is within the grid bounds
         if 0 <= nx < MAX and 0 <= ny < MAX:
+            # Exclude neighbors that are vertices of an enclosure
+            if any(neighbor.x == vertex.x and neighbor.y == vertex.y for enclosure in enclosures for vertex in enclosure):
+                continue
             # Make sure neighbor isn't in enclosure
             if not isPointInEnclosure(point, enclosures):
                 neighbors.append(neighbor)
