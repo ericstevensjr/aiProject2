@@ -1,2 +1,2 @@
 Path Cost: 77
-Nodes Expanded: 2114
+Nodes Expanded: 2115
