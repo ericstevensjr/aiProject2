@@ -135,7 +135,6 @@ def getNeighbors(point, enclosures, MAX):
 
     return neighbors
 
-
 def reconstructPath(parentNodes, source, destination):
     path = []
     currentPoint = destination
@@ -146,3 +145,8 @@ def reconstructPath(parentNodes, source, destination):
     path.reverse()
 
     return path
+
+def writeSummaryFile(totalCost, nodesExpanded, filename = "summary.txt"):
+    with open(filename, 'w') as file:
+        file.write(f"Path Cost: {totalCost}\n")
+        file.write(f"Nodes Expanded: {nodesExpanded}\n")

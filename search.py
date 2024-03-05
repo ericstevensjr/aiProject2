@@ -51,7 +51,7 @@ if __name__ == "__main__":
 
     #### Here call your search to compute and collect res_path
     res_path, totalCost, nodesExpanded = breadthFirstSearch(source, dest, epolygons, tpolygons, MAX)
-
+    writeSummaryFile(totalCost, nodesExpanded)
     # res_path = [Point(24,17), Point(25,17), Point(26,17), Point(27,17),  
     #            Point(28,17), Point(28,18), Point(28,19), Point(28,20)]
     
