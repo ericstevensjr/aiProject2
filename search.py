@@ -8,6 +8,7 @@ from grid import *
 from breadthFirstSearch import *
 from depthFirstSearch import *
 from greedyBestFirstSearch import *
+from aStar import *
 
 def gen_polygons(worldfilepath):
     polygons = []
@@ -52,9 +53,10 @@ if __name__ == "__main__":
             draw_green_line(ax, [polygon[i].x, polygon[(i+1)%len(polygon)].x], [polygon[i].y, polygon[(i+1)%len(polygon)].y])
 
     #### Here call your search to compute and collect res_path
-    #res_path, totalCost, nodesExpanded = depthFirstSearch(source, dest, epolygons, tpolygons, MAX)
-    #res_path, totalCost, nodesExpanded = breadthFirstSearch(source, dest, epolygons, tpolygons, MAX)
-    res_path, totalCost, nodesExpanded = greedyBestFirstSearch(source, dest, epolygons, tpolygons, MAX)
+    # res_path, totalCost, nodesExpanded = depthFirstSearch(source, dest, epolygons, tpolygons, MAX)
+    # res_path, totalCost, nodesExpanded = breadthFirstSearch(source, dest, epolygons, tpolygons, MAX)
+    # res_path, totalCost, nodesExpanded = greedyBestFirstSearch(source, dest, epolygons, tpolygons, MAX)
+    res_path, totalCost, nodesExpanded = aStar(source, dest, epolygons, tpolygons, MAX)
     writeSummaryFile(totalCost, nodesExpanded)
 
     for i in range(len(res_path)-1):

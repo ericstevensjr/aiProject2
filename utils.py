@@ -163,3 +163,8 @@ def calculatePathCost(path, turfs):
         else:
             cost += 1
     return cost
+
+def actionCost(currentPoint, nextPoint, turfs):
+    if isPointInTurf(nextPoint, turfs):
+        return 1.5
+    return 1
