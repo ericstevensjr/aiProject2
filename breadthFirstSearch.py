@@ -16,7 +16,7 @@ def breadthFirstSearch(sourcePoint, destinationPoint, enclosures, turfs, MAX):
             break
 
         for next in getNeighbors(currentPoint, enclosures, MAX):
-            newCost = pathCost[currentPoint] + (1.5 if isPointInTurf(next, turfs) else 1)
+            newCost = pathCost[currentPoint] + 1
             if next not in pathCost or newCost < pathCost[next]:
                 pathCost[next] = newCost
                 priority = newCost
