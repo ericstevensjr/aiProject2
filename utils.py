@@ -1,4 +1,5 @@
 import heapq
+import math
 from grid import Point
 
 class Stack:
@@ -130,7 +131,7 @@ def getNeighbors(point, enclosures, MAX):
             if any(neighbor.x == vertex.x and neighbor.y == vertex.y for enclosure in enclosures for vertex in enclosure):
                 continue
             # Make sure neighbor isn't in enclosure
-            if not isPointInEnclosure(point, enclosures):
+            if not isPointInEnclosure(neighbor, enclosures):
                 neighbors.append(neighbor)
 
     return neighbors
@@ -150,3 +151,15 @@ def writeSummaryFile(totalCost, nodesExpanded, filename = "summary.txt"):
     with open(filename, 'w') as file:
         file.write(f"Path Cost: {totalCost}\n")
         file.write(f"Nodes Expanded: {nodesExpanded}\n")
+
+def heuristic(point, goal):
+    return math.sqrt((point.x - goal.x) ** 2 + (point.y - goal.y) ** 2)
+
+def calculatePathCost(path, turfs):
+    cost = 0
+    for i in range(len(path) - 1):
+        if isPointInTurf(path[i + 1], turfs):
+            cost += 1.5
+        else:
+            cost += 1
+    return cost
