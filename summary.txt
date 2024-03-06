@@ -1,2 +1,16 @@
-Path Cost: 85.0
-Nodes Expanded: 1798
+Depth-First Search:
+ Path Cost: 82
+ Nodes Expanded: 2046
+
+Breadth-First Search:
+ Path Cost: 82
+ Nodes Expanded: 2048
+
+Greedy Best First Search:
+ Path Cost: 94.0
+ Nodes Expanded: 103
+
+A* Search:
+ Path Cost: 85.0
+ Nodes Expanded: 1798
+
