@@ -62,8 +62,8 @@ if __name__ == "__main__":
     with open("summary.txt", "w"):
         pass
     
-    epolygons = gen_polygons('TestingGrid/world1_enclosures.txt')
-    tpolygons = gen_polygons('TestingGrid/world1_turfs.txt')
+    epolygons = gen_polygons('TestingGrid/world2_enclosures.txt')
+    tpolygons = gen_polygons('TestingGrid/world2_turfs.txt')
 
     source = Point(8,10)
     dest = Point(43,45)
