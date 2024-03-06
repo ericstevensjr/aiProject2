@@ -62,8 +62,24 @@ if __name__ == "__main__":
     with open("summary.txt", "w"):
         pass
     
-    epolygons = gen_polygons('TestingGrid/world2_enclosures.txt')
-    tpolygons = gen_polygons('TestingGrid/world2_turfs.txt')
+    # Prompt the user to choose the world
+    world_choice = input("Select a world (1 or 2): ")
+    
+    # Initialize file paths based on the world choice
+    if world_choice == '1':
+        enclosures_path = 'TestingGrid/world1_enclosures.txt'
+        turfs_path = 'TestingGrid/world1_turfs.txt'
+    elif world_choice == '2':
+        enclosures_path = 'TestingGrid/world2_enclosures.txt'
+        turfs_path = 'TestingGrid/world2_turfs.txt'
+    else:
+        print("Invalid choice. Defaulting to world 1.")
+        enclosures_path = 'TestingGrid/world1_enclosures.txt'
+        turfs_path = 'TestingGrid/world1_turfs.txt'
+
+    # Load polygon data from files
+    epolygons = gen_polygons(enclosures_path)
+    tpolygons = gen_polygons(turfs_path)
 
     source = Point(8,10)
     dest = Point(43,45)
@@ -72,7 +88,6 @@ if __name__ == "__main__":
     chosenAlgorithm = user_select_algorithm()
     if chosenAlgorithm:
         res_path, totalCost, nodesExpanded = chosenAlgorithm(source, dest, epolygons, tpolygons, MAX)
-
 
     fig, ax = draw_board()
     draw_grids(ax)
