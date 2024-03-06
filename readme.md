@@ -15,5 +15,3 @@ To run the program on the command line the way I did, after the virtual enviornm
 I did not use any other packages in the development of this project.
 
 After the programming is running, just follow the directions on the command line. To run the program, re-enter the command above. I unfortunately did not implement a user-prompt for restarting the program.
-
-I had some trouble implementing DFS. I couldn't figure out what the problem is before the deadline. It is almost mirroring BFS, but not exactly. I tried different directions, neighbors, stack code, etc. I couldn't figure it out.
