@@ -1,6 +1,6 @@
 Depth-First Search:
- Path Cost: 82
- Nodes Expanded: 2046
+ Path Cost: 748
+ Nodes Expanded: 1216
 
 Breadth-First Search:
  Path Cost: 82
