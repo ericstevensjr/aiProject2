@@ -1,14 +1,18 @@
 from utils import *
 from grid import Point
 
+# Breadth-First Search Algorithm
 def breadthFirstSearch(sourcePoint, destinationPoint, enclosures, turfs, MAX):
+    # Initialize frontier with source point
     frontier = Queue()
     frontier.push(sourcePoint)
+    # Set to keep track of visited points
     visited = set()
     parentNodes = {sourcePoint: None}
     pathCost = {sourcePoint: 0}
     nodesExpanded = 0
 
+    # Loop until frontier is empty of points
     while not frontier.isEmpty():
         currentPoint = frontier.pop()
         nodesExpanded += 1

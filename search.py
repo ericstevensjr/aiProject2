@@ -10,7 +10,7 @@ from depthFirstSearch import *
 from greedyBestFirstSearch import *
 from aStar import *
 
-def run_all_algorithms_and_log_results(source, destination, epolygons, tpolygons, MAX):
+def runAllAlgorithmsAndLogResults(sourcePoint, destinationPoint, enclosures, turfs, MAX):
     algorithms = {
         'Depth-First Search': depthFirstSearch,
         'Breadth-First Search': breadthFirstSearch,
@@ -20,10 +20,10 @@ def run_all_algorithms_and_log_results(source, destination, epolygons, tpolygons
     
     with open("summary.txt", "a") as file:
         for name, algorithm in algorithms.items():
-            res_path, totalCost, nodesExpanded = algorithm(source, destination, epolygons, tpolygons, MAX)
+            res_path, totalCost, nodesExpanded = algorithm(sourcePoint, destinationPoint, enclosures, turfs, MAX)
             file.write(f"{name}:\n Path Cost: {totalCost}\n Nodes Expanded: {nodesExpanded}\n\n")
 
-def user_select_algorithm():
+def userSelectAlgorithm():
     algorithms = {
         '1': ('Depth-First Search', depthFirstSearch),
         '2': ('Breadth-First Search', breadthFirstSearch),
@@ -61,31 +61,31 @@ def gen_polygons(worldfilepath):
 if __name__ == "__main__":
     with open("summary.txt", "w"):
         pass
-    
+
     # Prompt the user to choose the world
-    world_choice = input("Select a world (1 or 2): ")
+    worldChoice = input("Select a world (1 or 2): ")
     
     # Initialize file paths based on the world choice
-    if world_choice == '1':
-        enclosures_path = 'TestingGrid/world1_enclosures.txt'
-        turfs_path = 'TestingGrid/world1_turfs.txt'
-    elif world_choice == '2':
-        enclosures_path = 'TestingGrid/world2_enclosures.txt'
-        turfs_path = 'TestingGrid/world2_turfs.txt'
+    if worldChoice == '1':
+        enclosuresPath = 'TestingGrid/world1_enclosures.txt'
+        turfsPath = 'TestingGrid/world1_turfs.txt'
+    elif worldChoice == '2':
+        enclosuresPath = 'TestingGrid/world2_enclosures.txt'
+        turfsPath = 'TestingGrid/world2_turfs.txt'
     else:
         print("Invalid choice. Defaulting to world 1.")
-        enclosures_path = 'TestingGrid/world1_enclosures.txt'
-        turfs_path = 'TestingGrid/world1_turfs.txt'
+        enclosuresPath = 'TestingGrid/world1_enclosures.txt'
+        turfsPath = 'TestingGrid/world1_turfs.txt'
 
     # Load polygon data from files
-    epolygons = gen_polygons(enclosures_path)
-    tpolygons = gen_polygons(turfs_path)
+    epolygons = gen_polygons(enclosuresPath)
+    tpolygons = gen_polygons(turfsPath)
 
     source = Point(8,10)
     dest = Point(43,45)
 
-    run_all_algorithms_and_log_results(source, dest, epolygons, tpolygons, MAX)
-    chosenAlgorithm = user_select_algorithm()
+    runAllAlgorithmsAndLogResults(source, dest, epolygons, tpolygons, MAX)
+    chosenAlgorithm = userSelectAlgorithm()
     if chosenAlgorithm:
         res_path, totalCost, nodesExpanded = chosenAlgorithm(source, dest, epolygons, tpolygons, MAX)
 

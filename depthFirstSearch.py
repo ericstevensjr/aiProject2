@@ -1,25 +1,25 @@
 from utils import *
 from grid import Point
 
+# Depth-First Search Algorithm
 def depthFirstSearch(sourcePoint, destinationPoint, enclosures, turfs, MAX):
-    stack = [(sourcePoint, [sourcePoint])]  # Stack holds tuples of (current node, path to current node)
+    # Had to create my own stack instead of using the function already made.
+    #     for some reason, the provided stack was not working for me.
+    stack = [(sourcePoint, [sourcePoint])] 
     visited = set([sourcePoint])
-    nodes_expanded = 0
+    nodesExpanded = 0
 
     while stack:
-        current_node, path = stack.pop()
-        nodes_expanded += 1
+        currentNode, path = stack.pop()
+        nodesExpanded += 1
 
-        # If the current node is the destination, return the path and its cost
-        if current_node == destinationPoint:
-            path_cost = len(path) - 1  # Path cost is 1 per move
-            return path, path_cost, nodes_expanded
+        if currentNode == destinationPoint:
+            return path, len(path) - 1, nodesExpanded
 
-        for neighbor in getNeighbors(current_node, enclosures, MAX):
+        neighbors = getNeighbors(currentNode, enclosures, MAX)
+        for neighbor in neighbors:
             if neighbor not in visited:
                 visited.add(neighbor)
-                # For each unvisited neighbor, push it onto the stack along with the path taken to reach it
                 stack.append((neighbor, path + [neighbor]))
 
-    # If the loop exits without finding the destination, the destination is not reachable
-    return [], 0, nodes_expanded
+    return [], 0, nodesExpanded

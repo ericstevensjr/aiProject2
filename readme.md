@@ -14,4 +14,6 @@ To run the program on the command line the way I did, after the virtual enviornm
 
 I did not use any other packages in the development of this project.
 
-After the programming is running, just follow the directions on the command line. To run the program, re-enter the command above. I unfortunately did not implement a user-prompt for restarting the program.
+After the programming is running, just follow the directions on the command line. To run the program, re-enter the command above. I unfortunately did not implement a user-prompt for restarting the program. 
+
+All the algorithms stats are generated into summary.txt. It shows the stats based on what world the user picks. All four algorithm's stats will show up in summary.txt regardless of what the user picks to visualize.

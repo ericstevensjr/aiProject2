@@ -1,6 +1,7 @@
 from utils import *
 from grid import Point
 
+# Greedy Best First Search Algorithm
 def greedyBestFirstSearch(sourcePoint, destinationPoint, enclosures, turfs, MAX):
     frontier = PriorityQueue()
     frontier.push(sourcePoint, 0)

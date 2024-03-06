@@ -104,18 +104,21 @@ def isPointInsidePolygon(point, polygon):
 
     return inside
 
+# Checking if point is in an enclosure
 def isPointInEnclosure(point, enclosures):  
     for enclosure in enclosures:
         if isPointInsidePolygon(point, enclosure):
             return True
     return False
 
+# Checking if point is in a turf
 def isPointInTurf(point, turfs):
     for turf in turfs:
         if isPointInsidePolygon(point, turf):
             return True
     return False
 
+# Function that gets a point's neighbors and expands it
 def getNeighbors(point, enclosures, MAX):
     directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
     neighbors = []
@@ -136,6 +139,7 @@ def getNeighbors(point, enclosures, MAX):
 
     return neighbors
 
+# Function to recreate the path
 def reconstructPath(parentNodes, source, destination):
     path = []
     currentPoint = destination
@@ -147,14 +151,17 @@ def reconstructPath(parentNodes, source, destination):
 
     return path
 
+# Function to write to summary.txt
 def writeSummaryFile(totalCost, nodesExpanded, filename = "summary.txt"):
     with open(filename, 'w') as file:
         file.write(f"Path Cost: {totalCost}\n")
         file.write(f"Nodes Expanded: {nodesExpanded}\n")
 
+# Straight Line Heurisitc Function
 def heuristic(point, goal):
     return math.sqrt((point.x - goal.x) ** 2 + (point.y - goal.y) ** 2)
 
+# Calculating path cost
 def calculatePathCost(path, turfs):
     cost = 0
     for i in range(len(path) - 1):
@@ -164,6 +171,7 @@ def calculatePathCost(path, turfs):
             cost += 1
     return cost
 
+# Action cost for path math
 def actionCost(currentPoint, nextPoint, turfs):
     if isPointInTurf(nextPoint, turfs):
         return 1.5
